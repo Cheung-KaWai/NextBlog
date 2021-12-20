@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useContext } from "react/cjs/react.development";
 import { AuthContext } from "../context/AuthContextProvider";
 
 export default function Register() {
@@ -28,7 +27,7 @@ export default function Register() {
       );
       window.localStorage.setItem("user", response.data.user);
       context.setLoggedUser(response.data.user);
-      router.push("/login");
+      router.push("/home");
     } catch (e) {
       setError(e.message);
     }
