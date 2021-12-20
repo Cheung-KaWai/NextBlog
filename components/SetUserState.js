@@ -11,6 +11,8 @@ export default function SetUserState({ children }) {
     if (user) {
       context.setLoggedUser(JSON.parse(user));
       router.push("/home");
+    } else {
+      router.push("/login");
     }
   }, []);
 
