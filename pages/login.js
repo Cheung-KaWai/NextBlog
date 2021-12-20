@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { AuthContext } from "../context/AuthContextProvider";
 
 export default function Login() {
   const [email, setEmail] = useState(undefined);
   const [password, setPassword] = useState(undefined);
-  const [jwt, setJwt] = useState(undefined);
   const [error, setError] = useState(undefined);
+
+  const context = useContext(AuthContext);
+  const router = useRouter();
 
   const handleLogin = async (event) => {
     // https://still-escarpment-29927.herokuapp.com/api/auth/local
@@ -19,9 +23,11 @@ export default function Login() {
           password: password,
         }
       );
-      setJwt(response.data.jwt);
+      window.localStorage.setItem("user", JSON.stringify(response.data.user));
+      context.setLoggedUser(response.data.user);
+      router.push("/home");
     } catch (e) {
-      setError("No user account found");
+      setError(e.message);
     }
   };
 
@@ -45,7 +51,6 @@ export default function Login() {
         <button type="submit">Login</button>
       </form>
       <p>{error}</p>
-      <p>{jwt}</p>
     </>
   );
 }

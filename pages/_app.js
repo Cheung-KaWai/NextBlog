@@ -1,7 +1,16 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
+import AuthContextProvider from "../context/AuthContextProvider";
+import { useEffect } from "react";
+import SetUserState from "../components/SetUserState";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <AuthContextProvider>
+      <SetUserState>
+        <Component {...pageProps} />
+      </SetUserState>
+    </AuthContextProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

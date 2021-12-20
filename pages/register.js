@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { useContext } from "react/cjs/react.development";
+import { AuthContext } from "../context/AuthContextProvider";
 
 export default function Register() {
   const [userName, setUserName] = useState(undefined);
   const [email, setEmail] = useState(undefined);
   const [password, setPassword] = useState(undefined);
   const [error, setError] = useState(undefined);
+
+  const context = useContext(AuthContext);
+  const router = useRouter();
+
   const handleRegister = async (event) => {
     // https://still-escarpment-29927.herokuapp.com/api/auth/local/register
     // http://localhost:1337/api/auth/local/register
@@ -19,6 +26,9 @@ export default function Register() {
           password: password,
         }
       );
+      window.localStorage.setItem("user", response.data.user);
+      context.setLoggedUser(response.data.user);
+      router.push("/login");
     } catch (e) {
       setError(e.message);
     }
