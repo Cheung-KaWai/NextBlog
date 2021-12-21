@@ -45,7 +45,7 @@ function AddPost() {
         // https://still-escarpment-29927.herokuapp.com/api/blogs
         // http://localhost:1337/api/blogs
         axios
-          .post("http://localhost:1337/api/blogs", data)
+          .post("https://still-escarpment-29927.herokuapp.com/api/blogs", data)
           .then((response) => router.push("/home"))
           .catch((error) => console.log(error));
 
