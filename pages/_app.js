@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 import AuthContextProvider from "../context/AuthContextProvider";
-import { useEffect } from "react";
 import SetUserState from "../components/SetUserState";
 
 function MyApp({ Component, pageProps }) {
