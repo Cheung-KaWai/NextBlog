@@ -4,12 +4,10 @@ import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContextProvider";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import styles from "../styles/Login.module.scss";
+import styles from "../styles/Auth.module.scss";
 import Link from "next/link";
 
 export default function Login() {
-  const [email, setEmail] = useState(undefined);
-  const [password, setPassword] = useState(undefined);
   const [error, setError] = useState(undefined);
 
   const context = useContext(AuthContext);
@@ -82,9 +80,9 @@ export default function Login() {
           Login
         </button>
         <div className={styles.link}>
-          <p>No Account yet?&nbsp;</p>
+          <p>No account yet?&nbsp;</p>
           <Link href="/register" replace>
-            <a>Sign up</a>
+            <a>Sign Up</a>
           </Link>
         </div>
       </Form>
