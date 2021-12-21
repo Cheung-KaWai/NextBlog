@@ -9,8 +9,10 @@ export default function SetUserState({ children }) {
   useEffect(() => {
     const user = window.localStorage.getItem("user");
     if (user) {
+      if (router.pathname === "/login" || router.pathname === "/register") {
+        router.push("/home");
+      }
       context.setLoggedUser(JSON.parse(user));
-      router.push("/home");
     } else {
       router.push("/login");
     }
