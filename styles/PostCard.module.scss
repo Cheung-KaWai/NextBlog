@@ -1,18 +1,14 @@
 .article {
   box-shadow: 2px 1px 18px 8px rgba(102, 102, 102, 0.05);
   width: 60rem;
-  margin: 2rem auto;
+  margin: 2rem 0;
   padding: 3rem;
   border-left: 1rem solid #46009f;
+  border-radius: 0 0.5rem 0.5rem 0;
   h2 {
     color: #46009f;
     margin-bottom: 1rem;
   }
-
-  // .divider {
-  //   height: 0.2rem;
-  //   margin: 0.5rem 0;
-  // }
 
   .summary {
     margin-top: 1rem;

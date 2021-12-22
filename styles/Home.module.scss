@@ -4,4 +4,32 @@
     text-align: center;
     color: #46009f;
   }
+
+  .blogsContainer {
+    align-items: center;
+    width: 60rem;
+    margin: 0 auto;
+  }
+}
+
+.addPost {
+  cursor: pointer;
+  display: flex;
+  width: fit-content;
+  background-color: #46009f;
+  align-items: center;
+  padding: 1rem 2rem;
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  &:hover,
+  &:focus {
+    outline: 0.4rem outset rgba(70, 0, 159, 0.2);
+  }
+  svg {
+    margin-left: 1rem;
+  }
+  a {
+    line-height: 2.2rem;
+  }
 }

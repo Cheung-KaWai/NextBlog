@@ -1,0 +1,113 @@
+.editor {
+  width: 66rem;
+  button {
+    border: none;
+    color: #46009f;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    text-transform: capitalize;
+    cursor: pointer;
+    outline: 0.3rem solid #46009f;
+    border-radius: 0.5rem;
+    &:hover {
+      color: white;
+      background-color: #46009f;
+    }
+  }
+}
+
+.title {
+  margin: 4rem 0;
+  text-align: center;
+  color: #46009f;
+}
+.content {
+  margin: 2rem 0;
+  background-color: #e2e2e2;
+  padding: 2rem 2.5rem;
+  border-radius: 0.5rem;
+  min-height: 20rem;
+}
+
+.isActive {
+  background-color: #46009f;
+  color: white !important;
+}
+
+.container {
+  width: 70rem;
+  margin: 2rem auto;
+  display: flex;
+  padding: 2rem;
+  flex-direction: column;
+  box-shadow: 0px 0px 20px 8px rgba(102, 102, 102, 0.15);
+
+  input {
+    height: 4rem;
+    padding: 0 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    background-color: #3b3b3b0f;
+    font-size: 1.8rem;
+    text-transform: capitalize;
+    color: #000000a1;
+    &:focus {
+      outline: 0.35rem outset rgba(70, 0, 159, 0.1);
+    }
+  }
+
+  textarea {
+    height: 8rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    background-color: #3b3b3b0f;
+    resize: none;
+    overflow: hidden;
+    font-size: 1.8rem;
+    color: #000000a1;
+    text-transform: capitalize;
+    &:focus {
+      outline: 0.35rem outset rgba(70, 0, 159, 0.1);
+    }
+  }
+
+  label {
+    font-weight: 600;
+  }
+
+  .divider {
+    height: 0.2rem;
+    background-color: #e2e2e2;
+    margin: 2rem 0;
+    border-radius: 1rem;
+  }
+
+  .button {
+    height: 4rem;
+    background-color: #46009f;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    &:hover,
+    &:focus {
+      outline: 0.5rem outset rgba(70, 0, 159, 0.2);
+    }
+  }
+  .error {
+    color: #46009f;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+}
+
+.layout {
+  width: 70rem;
+  margin: 0 auto;
+}
