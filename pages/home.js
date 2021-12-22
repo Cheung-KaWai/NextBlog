@@ -1,7 +1,8 @@
-import { useRouter } from "next/router";
-import React, { useContext } from "react";
-import { AuthContext } from "../context/AuthContextProvider";
+import React from "react";
 import axios from "axios";
+import Navbar from "../components/molecules/Navbar";
+import ListBlogs from "../components/organisms/ListBlogs";
+import styles from "../styles/Home.module.scss";
 
 export async function getStaticProps() {
   // https://still-escarpment-29927.herokuapp.com/api/blogs
@@ -20,22 +21,11 @@ export async function getStaticProps() {
 }
 
 export default function Home({ blogs }) {
-  const context = useContext(AuthContext);
-  const router = useRouter();
-
-  const handleLogout = () => {
-    window.localStorage.removeItem("user");
-    context.setLoggedUser(undefined);
-    router.push("/login");
-  };
-
   return (
-    <div>
-      <p>{context.loggedUser && context.loggedUser.username}</p>
-      <button onClick={handleLogout}>Logout</button>
-      {blogs.map((x, index) => (
-        <p key={index}>{x.id}</p>
-      ))}
+    <div className={styles.container}>
+      <Navbar></Navbar>
+      <h1>Latest Blog Posts</h1>
+      <ListBlogs blogs={blogs} />
     </div>
   );
 }
