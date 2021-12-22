@@ -15,8 +15,9 @@ export default function Navbar() {
 
   return (
     <nav className={styles.container}>
-      <div>
-        <p>Welcome {context.loggedUser && context.loggedUser.username}</p>
+      <div className={styles.logo}>
+        {/* <p>Welcome {context.loggedUser && context.loggedUser.username}</p> */}
+        <img src="/logo.png"></img>
       </div>
       <div>
         <button onClick={handleLogout}>Logout</button>
