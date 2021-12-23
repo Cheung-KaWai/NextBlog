@@ -10,10 +10,22 @@ import axios from "axios";
 import styles from "../../styles/AddPost.module.scss";
 import Placeholder from "@tiptap/extension-placeholder";
 import LinkButton from "../atoms/LinkButton";
+import { useContext } from "react/cjs/react.development";
+import { AuthContext } from "../../context/AuthContextProvider";
 
 export default function AddPostForm() {
   const turndownService = new TurndownService();
   const router = useRouter();
+  const context = useContext(AuthContext);
+
+  const cookie = document.cookie;
+  const jwt = cookie.split("=")[1];
+  const config = {
+    headers: {
+      "Content-type": "application/json",
+      Authorization: jwt,
+    },
+  };
 
   const editor = useEditor({
     extensions: [
@@ -44,7 +56,11 @@ export default function AddPostForm() {
           const html = editor.getHTML();
           const markdown = turndownService.turndown(html);
           const data = {
-            data: { ...values, Content: markdown },
+            data: {
+              ...values,
+              Content: markdown,
+              Author: context.loggedUser.id,
+            },
           };
 
           // https://still-escarpment-29927.herokuapp.com/api/blogs
@@ -52,7 +68,8 @@ export default function AddPostForm() {
           axios
             .post(
               "https://still-escarpment-29927.herokuapp.com/api/blogs",
-              data
+              data,
+              config
             )
             .then((response) => router.push("/home"))
             .catch((error) => console.log(error));

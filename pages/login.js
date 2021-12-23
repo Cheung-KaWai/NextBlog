@@ -22,6 +22,7 @@ export default function Login() {
         loginData
       );
       window.localStorage.setItem("user", JSON.stringify(response.data.user));
+      document.cookie = `jwt = Bearer ${response.data.jwt};secure`;
       context.setLoggedUser(response.data.user);
       router.push("/home");
     } catch (e) {

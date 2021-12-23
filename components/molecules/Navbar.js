@@ -9,6 +9,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     window.localStorage.removeItem("user");
+    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     context.setLoggedUser(undefined);
     router.push("/login");
   };
