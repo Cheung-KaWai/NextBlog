@@ -1,0 +1,27 @@
+.container {
+  margin-top: 2rem;
+  display: flex;
+  .linkButton {
+    background-color: #46009f;
+    color: white;
+  }
+  .number {
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  .button {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+  }
+
+  .next {
+    transform: rotate(180deg);
+  }
+}

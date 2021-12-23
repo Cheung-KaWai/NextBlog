@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import Navbar from "../../../components/molecules/Navbar";
+import PaginationMenu from "../../../components/molecules/PaginationMenu";
 
 export async function getStaticPaths() {
   const res = await axios.get(
@@ -21,18 +23,21 @@ export async function getStaticProps({ params }) {
     `https://still-escarpment-29927.herokuapp.com/api/blogs?pagination[page]=${params.page}&pagination[pageSize]=2`
   );
   const post = res.data.data;
+  const maxPages = res.data.meta.pagination.pageCount;
 
   // Pass post data to the page via props
-  return { props: { post, currentPage: params.page } };
+  return { props: { post, currentPage: params.page, pageCount: maxPages } };
 }
 
-export default function Page({ post, currentPage }) {
+export default function Page({ post, currentPage, pageCount }) {
   return (
     <div>
+      <Navbar></Navbar>
       {post.map((x, index) => (
         <p key={index}>{x.id}</p>
       ))}
       <p>current page,{currentPage}</p>
+      <PaginationMenu pages={pageCount} currentPage={currentPage} />
     </div>
   );
 }
