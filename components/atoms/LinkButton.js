@@ -6,12 +6,12 @@ import BackImage from "./BackImage";
 
 export default function LinkButton({ text, link, back }) {
   return (
-    <div className={styles.addPost}>
-      <Link href={link}>
+    <Link href={link}>
+      <div className={styles.addPost}>
         <a>{text}</a>
-      </Link>
-      {!back && <PlusImage />}
-      {back && <BackImage />}
-    </div>
+        {!back && <PlusImage />}
+        {back && <BackImage />}
+      </div>
+    </Link>
   );
 }

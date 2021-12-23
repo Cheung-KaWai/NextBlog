@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import Navbar from "../../../components/molecules/Navbar";
 import PaginationMenu from "../../../components/molecules/PaginationMenu";
+import ListBlogs from "../../../components/organisms/ListBlogs";
+import styles from "../../../styles/Pagination.module.scss";
 
 export async function getStaticPaths() {
   const res = await axios.get(
@@ -31,12 +33,10 @@ export async function getStaticProps({ params }) {
 
 export default function Page({ post, currentPage, pageCount }) {
   return (
-    <div>
+    <div className={styles.pageContainer}>
       <Navbar></Navbar>
-      {post.map((x, index) => (
-        <p key={index}>{x.id}</p>
-      ))}
-      <p>current page,{currentPage}</p>
+      <h1>Latest Blog Posts</h1>
+      <ListBlogs blogs={post} />
       <PaginationMenu pages={pageCount} currentPage={currentPage} />
     </div>
   );

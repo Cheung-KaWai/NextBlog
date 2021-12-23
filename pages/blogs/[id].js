@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import CommentForm from "../../components/organisms/CommentForm";
+import Navbar from "../../components/molecules/Navbar";
 
 export async function getStaticPaths() {
   // https://still-escarpment-29927.herokuapp.com/api/blogs
@@ -32,5 +34,11 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Post({ post }) {
-  return <div>{post.id}</div>;
+  return (
+    <>
+      <Navbar />
+      <div>{post.id}</div>
+      <CommentForm id={post.id} />
+    </>
+  );
 }

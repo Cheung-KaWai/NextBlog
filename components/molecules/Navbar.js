@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContextProvider";
 import styles from "../../styles/Navbar.module.scss";
+import Link from "next/link";
 
 export default function Navbar() {
   const context = useContext(AuthContext);
@@ -18,7 +19,11 @@ export default function Navbar() {
     <nav className={styles.container}>
       <div className={styles.logo}>
         {/* <p>Welcome {context.loggedUser && context.loggedUser.username}</p> */}
-        <img src="/logo.png"></img>
+        <Link href="/blogs/pages/1">
+          <a>
+            <img src="/logo.png" alt="website logo"></img>
+          </a>
+        </Link>
       </div>
       <div>
         <button onClick={handleLogout}>Logout</button>

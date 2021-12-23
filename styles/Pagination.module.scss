@@ -1,6 +1,21 @@
+.pageContainer {
+  h1 {
+    margin: 4rem 0;
+    text-align: center;
+    color: #46009f;
+  }
+
+  .blogsContainer {
+    align-items: center;
+    width: 60rem;
+    margin: 0 auto;
+  }
+}
+
 .container {
-  margin-top: 2rem;
   display: flex;
+  width: fit-content;
+  margin: 2rem auto;
   .linkButton {
     background-color: #46009f;
     color: white;

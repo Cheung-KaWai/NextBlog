@@ -1,7 +1,7 @@
 import React from "react";
 import LinkButton from "../atoms/LinkButton";
 import PostCard from "../molecules/PostCard";
-import styles from "../../styles/Home.module.scss";
+import styles from "../../styles/Pagination.module.scss";
 
 export default function ListBlogs({ blogs }) {
   return (
