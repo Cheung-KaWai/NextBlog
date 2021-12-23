@@ -10,22 +10,13 @@ import axios from "axios";
 import styles from "../../styles/AddPost.module.scss";
 import Placeholder from "@tiptap/extension-placeholder";
 import LinkButton from "../atoms/LinkButton";
-import { useContext } from "react/cjs/react.development";
 import { AuthContext } from "../../context/AuthContextProvider";
 
 export default function AddPostForm() {
   const turndownService = new TurndownService();
+
   const router = useRouter();
   const context = useContext(AuthContext);
-
-  const cookie = document.cookie;
-  const jwt = cookie.split("=")[1];
-  const config = {
-    headers: {
-      "Content-type": "application/json",
-      Authorization: jwt,
-    },
-  };
 
   const editor = useEditor({
     extensions: [
@@ -60,6 +51,15 @@ export default function AddPostForm() {
               ...values,
               Content: markdown,
               Author: context.loggedUser.id,
+            },
+          };
+
+          const cookie = document.cookie;
+          const jwt = cookie.split("=")[1];
+          const config = {
+            headers: {
+              "Content-type": "application/json",
+              Authorization: jwt,
             },
           };
 
