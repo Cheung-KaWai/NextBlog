@@ -4,13 +4,14 @@ import * as Yup from "yup";
 import { AuthContext } from "../../context/AuthContextProvider";
 import axios from "axios";
 import { useRouter } from "next/router";
+import styles from "../../styles/AddPost.module.scss";
 
 export default function CommentForm({ id }) {
   const context = useContext(AuthContext);
   const router = useRouter();
 
   return (
-    <div>
+    <div className={styles.commentForm}>
       <h2>Leave a comment </h2>
       <Formik
         initialValues={{ Comment: "" }}
@@ -27,8 +28,6 @@ export default function CommentForm({ id }) {
               Blog: id,
             },
           };
-
-          console.log(data.data);
 
           const cookie = document.cookie;
           const jwt = cookie.split("=")[1];
@@ -50,11 +49,15 @@ export default function CommentForm({ id }) {
           setSubmitting(false);
         }}
       >
-        <Form>
+        <Form className={styles.container}>
           <label htmlFor="comment">Comment</label>
           <Field name="Comment" id="comment" as="textarea" />
-          <ErrorMessage name="Comment">{(msg) => <p>{msg}</p>}</ErrorMessage>
-          <button type="submit">Send</button>
+          <ErrorMessage name="Comment">
+            {(msg) => <p className={styles.error}>{msg}</p>}
+          </ErrorMessage>
+          <button type="submit" className={styles.button}>
+            Send
+          </button>
         </Form>
       </Formik>
     </div>

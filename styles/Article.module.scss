@@ -1,0 +1,29 @@
+.container {
+  width: 70rem;
+  margin: 0 auto;
+  padding: 5rem;
+
+  h1 {
+    margin-bottom: 3rem;
+    font-size: 5rem;
+    color: #46009f;
+  }
+  code {
+    padding: 2rem;
+    background-color: #e1e1e1;
+    border-radius: 0.5rem;
+  }
+  ol,
+  ul {
+    padding: 2rem;
+  }
+  p {
+    margin: 2rem 0;
+  }
+}
+
+.commentDiv {
+  background-color: #e5e5e5;
+  flex: 1;
+  padding: 5rem 0;
+}

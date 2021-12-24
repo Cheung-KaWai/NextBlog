@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import CommentForm from "../../components/organisms/CommentForm";
 import Navbar from "../../components/molecules/Navbar";
+import Article from "../../components/organisms/Article";
+import styles from "../../styles/Article.module.scss";
 
 export async function getStaticPaths() {
   // https://still-escarpment-29927.herokuapp.com/api/blogs
@@ -25,7 +27,7 @@ export async function getStaticProps({ params }) {
   // https://still-escarpment-29927.herokuapp.com/api/blogs
   // http://localhost:1337/api/blogs
   const res = await axios.get(
-    `https://still-escarpment-29927.herokuapp.com/api/blogs/${params.id}`
+    `https://still-escarpment-29927.herokuapp.com/api/blogs/${params.id}?populate=*`
   );
   const post = res.data.data;
 
@@ -35,10 +37,12 @@ export async function getStaticProps({ params }) {
 
 export default function Post({ post }) {
   return (
-    <>
+    <div>
       <Navbar />
-      <div>{post.id}</div>
-      <CommentForm id={post.id} />
-    </>
+      <Article post={post.attributes} />
+      <div className={styles.commentDiv}>
+        <CommentForm id={post.id} />
+      </div>
+    </div>
   );
 }
