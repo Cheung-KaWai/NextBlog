@@ -11,17 +11,6 @@ export default function Menubar({ editor }) {
       <div>
         <button
           onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
-          }
-          className={
-            editor.isActive("heading", { level: 1 }) ? styles.isActive : ""
-          }
-          type="button"
-        >
-          h1
-        </button>
-        <button
-          onClick={() =>
             editor.chain().focus().toggleHeading({ level: 2 }).run()
           }
           className={
@@ -75,9 +64,6 @@ export default function Menubar({ editor }) {
         >
           h6
         </button>
-      </div>
-
-      <div>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={editor.isActive("bold") ? styles.isActive : ""}

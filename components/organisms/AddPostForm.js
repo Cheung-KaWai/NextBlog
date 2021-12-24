@@ -29,7 +29,7 @@ export default function AddPostForm() {
 
   return (
     <div className={styles.layout}>
-      <LinkButton link="/home" text="Back" back={true}></LinkButton>
+      <LinkButton link="/blogs/pages/1" text="Back" back={true}></LinkButton>
       <Formik
         initialValues={{
           Title: "",

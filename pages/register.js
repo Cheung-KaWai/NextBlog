@@ -27,7 +27,7 @@ export default function Register() {
       document.cookie = `jwt = Bearer ${response.data.jwt};secure`;
       context.setLoggedUser(response.data.user);
       setLoading(false);
-      router.push("/home");
+      router.push("/blogs/pages/1");
     } catch (e) {
       setError(e.message);
     }

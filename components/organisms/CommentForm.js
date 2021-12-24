@@ -50,7 +50,7 @@ export default function CommentForm({ id }) {
         }}
       >
         <Form className={styles.container}>
-          <label htmlFor="comment">Comment</label>
+          <label htmlFor="comment"></label>
           <Field name="Comment" id="comment" as="textarea" />
           <ErrorMessage name="Comment">
             {(msg) => <p className={styles.error}>{msg}</p>}
