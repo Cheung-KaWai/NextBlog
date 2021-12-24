@@ -5,34 +5,52 @@ import Navbar from "../../components/molecules/Navbar";
 import Article from "../../components/organisms/Article";
 import styles from "../../styles/Article.module.scss";
 
-export async function getStaticPaths() {
-  // https://still-escarpment-29927.herokuapp.com/api/blogs
-  // http://localhost:1337/api/blogs
-  const res = await axios.get(
-    "https://still-escarpment-29927.herokuapp.com/api/blogs"
-  );
-  const posts = res.data.data;
+import client from "../../apollo-client";
+import { gql } from "@apollo/client";
 
-  // Get the paths we want to pre-render based on posts
-  const paths = posts.map((post) => ({
+export async function getStaticPaths() {
+  const { data } = await client.query({
+    query: gql`
+      query {
+        blogs {
+          data {
+            id
+          }
+        }
+      }
+    `,
+  });
+
+  const paths = data.blogs.data.map((post) => ({
     params: { id: post.id.toString() },
   }));
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  // https://still-escarpment-29927.herokuapp.com/api/blogs
-  // http://localhost:1337/api/blogs
-  const res = await axios.get(
-    `https://still-escarpment-29927.herokuapp.com/api/blogs/${params.id}?populate=*`
-  );
-  const post = res.data.data;
+  const { data } = await client.query({
+    query: gql`
+      query ($id: ID) {
+        blog(id: $id) {
+          data {
+            id
+            attributes {
+              Title
+              Content
+              createdAt
+            }
+          }
+        }
+      }
+    `,
+    variables: {
+      id: params.id,
+    },
+  });
 
   // Pass post data to the page via props
-  return { props: { post } };
+  return { props: { post: data.blog.data } };
 }
 
 export default function Post({ post }) {
