@@ -7,6 +7,7 @@ import client from "../../apollo-client";
 import { gql } from "@apollo/client";
 import axios from "axios";
 import AccountInfo from "../../components/molecules/AccountInfo";
+import ReactECharts from "echarts-for-react";
 
 export async function getStaticPaths() {
   const { data } = await client.query({
@@ -48,6 +49,22 @@ export default function Account({ blogscount, account }) {
   const context = useContext(AuthContext);
   const router = useRouter();
 
+  const option = {
+    xAxis: {
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    },
+    yAxis: {
+      type: "value",
+    },
+    series: [
+      {
+        data: [150, 230, 224, 218, 135, 147, 260],
+        type: "line",
+      },
+    ],
+  };
+
   const handleLogout = () => {
     router.push("/login");
     window.localStorage.removeItem("user");
@@ -59,6 +76,16 @@ export default function Account({ blogscount, account }) {
     <>
       <Navbar />
       <div className={styles.container}>
+        <ReactECharts
+          option={option}
+          // notMerge={true}
+          // lazyUpdate={true}
+          // theme={"theme_name"}
+          // onChartReady={this.onChartReadyCallback}
+          // onEvents={EventsDict}
+          // opts={}
+        />
+
         <AccountInfo blogs={blogscount} account={account} />
         {context.loggedUser && context.loggedUser.id == account.id && (
           <button onClick={handleLogout} className={styles.button}>
