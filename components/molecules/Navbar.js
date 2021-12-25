@@ -4,9 +4,15 @@ import Link from "next/link";
 import ProfileImage from "../../components/atoms/ProfileImage";
 import { useContext } from "react/cjs/react.development";
 import { AuthContext } from "../../context/AuthContextProvider";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
   const context = useContext(AuthContext);
+  const router = useRouter();
+
+  const handleAccount = () => {
+    router.push(`/accounts/${context.loggedUser && context.loggedUser.id}`);
+  };
 
   return (
     <nav className={styles.container}>
@@ -19,11 +25,9 @@ export default function Navbar() {
         </Link>
       </div>
 
-      <Link href={`/accounts/${context.loggedUser && context.loggedUser.id}`}>
-        <a>
-          <ProfileImage />
-        </a>
-      </Link>
+      <button onClick={handleAccount}>
+        <ProfileImage />
+      </button>
     </nav>
   );
 }
