@@ -18,7 +18,7 @@ export default function Navbar() {
         </Link>
       </div>
 
-      <Link href={`/accounts/${context.loggedUser.id}`}>
+      <Link href={`/accounts/${context.loggedUser && context.loggedUser.id}`}>
         <a>
           <ProfileImage />
         </a>
