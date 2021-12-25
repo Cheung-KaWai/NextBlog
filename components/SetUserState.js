@@ -16,6 +16,7 @@ export default function SetUserState({ children }) {
     } else {
       router.push("/login");
     }
+    console.log("khaba");
   }, []);
 
   return children;

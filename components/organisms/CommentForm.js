@@ -24,7 +24,7 @@ export default function CommentForm({ id }) {
           const data = {
             data: {
               ...values,
-              Writer: context.loggedUser.username,
+              UserId: context.loggedUser.id,
               Blog: id,
             },
           };

@@ -1,19 +1,12 @@
-import { useRouter } from "next/router";
-import React, { useContext } from "react";
-import { AuthContext } from "../../context/AuthContextProvider";
+import React from "react";
 import styles from "../../styles/Navbar.module.scss";
 import Link from "next/link";
+import ProfileImage from "../../components/atoms/ProfileImage";
+import { useContext } from "react/cjs/react.development";
+import { AuthContext } from "../../context/AuthContextProvider";
 
 export default function Navbar() {
   const context = useContext(AuthContext);
-  const router = useRouter();
-
-  const handleLogout = () => {
-    window.localStorage.removeItem("user");
-    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    context.setLoggedUser(undefined);
-    router.push("/login");
-  };
 
   return (
     <nav className={styles.container}>
@@ -25,9 +18,12 @@ export default function Navbar() {
           </a>
         </Link>
       </div>
-      <div>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
+
+      <Link href={`/accounts/${context.loggedUser && context.loggedUser.id}`}>
+        <a>
+          <ProfileImage />
+        </a>
+      </Link>
     </nav>
   );
 }
