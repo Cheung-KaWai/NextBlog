@@ -1,20 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "../../styles/Navbar.module.scss";
 import Link from "next/link";
 import ProfileImage from "../../components/atoms/ProfileImage";
-import { useContext } from "react/cjs/react.development";
 import { AuthContext } from "../../context/AuthContextProvider";
-import { useRouter } from "next/router";
 
 export default function Navbar() {
   const context = useContext(AuthContext);
-  const router = useRouter();
-
-  // const handleAccount = () => {
-  //   if (context.loggedUser) {
-  //     router.push(`/accounts/${context.loggedUser && context.loggedUser.id}`);
-  //   }
-  // };
 
   return (
     <nav className={styles.container}>
@@ -26,10 +17,12 @@ export default function Navbar() {
           </a>
         </Link>
       </div>
-      {context.loggedUser && <p>Test</p>}
-      {/* <button onClick={handleAccount}>
-        <ProfileImage />
-      </button> */}
+
+      <Link href={`/accounts/${context.loggedUser.id}`}>
+        <a>
+          <ProfileImage />
+        </a>
+      </Link>
     </nav>
   );
 }
