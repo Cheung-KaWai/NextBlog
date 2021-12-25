@@ -7,12 +7,12 @@ import { AuthContext } from "../../context/AuthContextProvider";
 import { useRouter } from "next/router";
 
 export default function Navbar() {
-  const context = useContext(AuthContext);
+  // const context = useContext(AuthContext);
   const router = useRouter();
 
-  const handleAccount = () => {
-    router.push(`/accounts/${context.loggedUser && context.loggedUser.id}`);
-  };
+  // const handleAccount = () => {
+  //   router.push(`/accounts/${context.loggedUser && context.loggedUser.id}`);
+  // };
 
   return (
     <nav className={styles.container}>
@@ -25,9 +25,9 @@ export default function Navbar() {
         </Link>
       </div>
 
-      <button onClick={handleAccount}>
+      {/* <button onClick={handleAccount}>
         <ProfileImage />
-      </button>
+      </button> */}
     </nav>
   );
 }
