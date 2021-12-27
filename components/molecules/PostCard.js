@@ -10,9 +10,7 @@ export default function PostCard({ data, id }) {
           <h2>{data.Title}</h2>
           <div className={styles.header}>
             <p>{data.createdAt.substring(0, 10)}</p>
-            <Link href={`/accounts/${data.Author.data.id}`}>
-              <a>{data.Author.data.attributes.username}</a>
-            </Link>
+            <p>{data.Author.data.attributes.username}</p>
           </div>
           <p className={styles.summary}>{data.Summary}</p>
         </a>

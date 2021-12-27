@@ -71,7 +71,7 @@ export default function AddPostForm() {
               data,
               config
             )
-            .then((response) => router.push("/home"))
+            .then((response) => router.push("/blogs/pages/1"))
             .catch((error) => console.log(error));
 
           setSubmitting(false);

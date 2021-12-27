@@ -10,13 +10,12 @@ export default function SetUserState({ children }) {
     const user = window.localStorage.getItem("user");
     if (user) {
       if (router.pathname === "/login" || router.pathname === "/register") {
-        router.push("/home");
+        router.push("/blogs/pages/1");
       }
       context.setLoggedUser(JSON.parse(user));
     } else {
       router.push("/login");
     }
-    console.log("khaba");
   }, []);
 
   return children;
