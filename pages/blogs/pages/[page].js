@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const res = await axios.get(
-    `https://still-escarpment-29927.herokuapp.com/api/blogs?pagination[page]=${params.page}&pagination[pageSize]=2`
+    `https://still-escarpment-29927.herokuapp.com/api/blogs?pagination[page]=${params.page}&pagination[pageSize]=2&populate=Author`
   );
   const post = res.data.data;
   const maxPages = res.data.meta.pagination.pageCount;

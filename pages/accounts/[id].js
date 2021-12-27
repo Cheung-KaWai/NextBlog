@@ -8,6 +8,7 @@ import { gql } from "@apollo/client";
 import axios from "axios";
 import AccountInfo from "../../components/molecules/AccountInfo";
 import ReactECharts from "echarts-for-react";
+import ListBlogsAccount from "../../components/organisms/ListBlogsAccount";
 
 export async function getStaticPaths() {
   const { data } = await client.query({
@@ -31,21 +32,37 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const res = await axios.get(
-    `https://still-escarpment-29927.herokuapp.com/api/blogs?filters[Author][id][$eq]=${params.id}`
+    `https://still-escarpment-29927.herokuapp.com/api/blogs?filters[Author][id][$eq]=${params.id}&populate=*`
   );
   const user = await axios.get(
     `https://still-escarpment-29927.herokuapp.com/api/users/${params.id}`
   );
+  const comments = await axios.get(
+    `https://still-escarpment-29927.herokuapp.com/api/comments?filters[UserId][id][$eq]=${params.id}`
+  );
+  const receceived = res.data.data.map(
+    (x) => x.attributes.Comments.data.length
+  );
+  console.log(res.data.data);
 
   return {
     props: {
       blogscount: res.data.data.length,
+      blogs: res.data.data,
       account: user.data,
+      commentscount: comments.data.data.length,
+      commentsReceived: receceived.reduce((a, b) => a + b, 0),
     },
   };
 }
 
-export default function Account({ blogscount, account }) {
+export default function Account({
+  blogscount,
+  account,
+  commentscount,
+  commentsReceived,
+  blogs,
+}) {
   const context = useContext(AuthContext);
   const router = useRouter();
 
@@ -76,7 +93,7 @@ export default function Account({ blogscount, account }) {
     <>
       <Navbar />
       <div className={styles.container}>
-        <ReactECharts
+        {/* <ReactECharts
           option={option}
           // notMerge={true}
           // lazyUpdate={true}
@@ -84,11 +101,19 @@ export default function Account({ blogscount, account }) {
           // onChartReady={this.onChartReadyCallback}
           // onEvents={EventsDict}
           // opts={}
+        /> */}
+
+        <AccountInfo
+          blogs={blogscount}
+          account={account}
+          comments={commentscount}
+          received={commentsReceived}
         />
 
-        <AccountInfo blogs={blogscount} account={account} />
+        <ListBlogsAccount blogs={blogs} />
+
         {context.loggedUser && context.loggedUser.id == account.id && (
-          <button onClick={handleLogout} className={styles.button}>
+          <button onClick={handleLogout} className={styles.logoutButton}>
             Logout
           </button>
         )}

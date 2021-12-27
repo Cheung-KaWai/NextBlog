@@ -24,6 +24,22 @@
   div {
     margin-bottom: 4rem;
   }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      font-size: 2rem;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 0.5rem;
+      text-decoration-thickness: 0.2rem;
+      &:hover {
+        color: #46009f;
+      }
+    }
+  }
 }
 
 .commentDiv {

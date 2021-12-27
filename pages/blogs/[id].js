@@ -39,6 +39,14 @@ export async function getStaticProps({ params }) {
               Title
               Content
               createdAt
+              Author {
+                data {
+                  id
+                  attributes {
+                    username
+                  }
+                }
+              }
             }
           }
         }
