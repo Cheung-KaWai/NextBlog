@@ -6,7 +6,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "../styles/Auth.module.scss";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import LoadingAnimation from "../components/atoms/LoadingAnimation";
 
 export default function Login() {
   const [error, setError] = useState(undefined);
@@ -38,34 +38,6 @@ export default function Login() {
       .required("Email cannot be empty"),
     password: Yup.string().required("Password cannot be empty"),
   });
-
-  const loadinContainerVariant = {
-    start: {
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-    end: {
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const loadingCircleVariants = {
-    start: {
-      y: "0%",
-    },
-    end: {
-      y: "100%",
-    },
-  };
-
-  const loadingCircleTransition = {
-    repeat: Infinity,
-    duration: 0.4,
-    ease: "easeInOut",
-  };
 
   return (
     <>
@@ -111,36 +83,7 @@ export default function Login() {
           <button type="submit" className={styles.button}>
             Login
           </button>
-          {loading && (
-            <motion.div
-              className={styles.animation}
-              variants={loadinContainerVariant}
-              initial="start"
-              animate="end"
-            >
-              <motion.span
-                variants={loadingCircleVariants}
-                transition={loadingCircleTransition}
-              />
-              <motion.span
-                variants={loadingCircleVariants}
-                transition={loadingCircleTransition}
-              />
-              <motion.span
-                variants={loadingCircleVariants}
-                transition={loadingCircleTransition}
-              />
-              <motion.span
-                variants={loadingCircleVariants}
-                transition={loadingCircleTransition}
-              />
-              <motion.span
-                variants={loadingCircleVariants}
-                transition={loadingCircleTransition}
-              />
-            </motion.div>
-          )}
-
+          {loading && <LoadingAnimation />}
           <div className={styles.link}>
             <p>No account yet?&nbsp;</p>
             <Link href="/register" replace>

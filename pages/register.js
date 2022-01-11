@@ -6,6 +6,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "../styles/Auth.module.scss";
 import Link from "next/link";
+import LoadingAnimation from "../components/atoms/LoadingAnimation";
 
 export default function Register() {
   const [loading, setLoading] = useState(false);
@@ -90,9 +91,9 @@ export default function Register() {
           {(msg) => <p className={styles.error}>{msg}</p>}
         </ErrorMessage>
         <button type="submit" className={styles.button}>
-          {!loading && "Register"}
-          {loading && "Bezig"}
+          Register
         </button>
+        {loading && <LoadingAnimation />}
         <div className={styles.link}>
           <p>Already registerd?&nbsp;</p>
           <Link href="/login" replace>
