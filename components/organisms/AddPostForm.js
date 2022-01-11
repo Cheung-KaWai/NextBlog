@@ -12,7 +12,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import LinkButton from "../atoms/LinkButton";
 import { AuthContext } from "../../context/AuthContextProvider";
 
-export default function AddPostForm() {
+export default function AddPostForm({ categories }) {
   const turndownService = new TurndownService();
 
   const router = useRouter();
@@ -34,6 +34,7 @@ export default function AddPostForm() {
         initialValues={{
           Title: "",
           Summary: "",
+          Category: "1",
         }}
         validationSchema={Yup.object({
           Title: Yup.string()
@@ -88,6 +89,16 @@ export default function AddPostForm() {
           <ErrorMessage name="Summary">
             {(msg) => <p className={styles.error}>{msg}</p>}
           </ErrorMessage>
+          <label htmlFor="Category">Category</label>
+          <Field as="select" name="Category" id="Category">
+            {categories
+              .sort((a, b) => (a.attributes.Name > b.attributes.Name ? 1 : -1))
+              .map((x, index) => (
+                <option key={index} value={x.id}>
+                  {x.attributes.Name}
+                </option>
+              ))}
+          </Field>
           <div className={styles.divider}></div>
           <div className={styles.editor}>
             <Menubar editor={editor} />
