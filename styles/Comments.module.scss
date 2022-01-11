@@ -1,0 +1,11 @@
+.container {
+  width: 60rem;
+  box-shadow: 2px 1px 18px 8px rgba(102, 102, 102, 0.05);
+  margin: 1rem auto;
+  padding: 2rem;
+  div {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}

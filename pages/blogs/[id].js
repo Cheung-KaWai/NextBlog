@@ -7,6 +7,7 @@ import styles from "../../styles/Article.module.scss";
 
 import client from "../../apollo-client";
 import { gql } from "@apollo/client";
+import ListComments from "../../components/organisms/ListComments";
 
 export async function getStaticPaths() {
   const { data } = await client.query({
@@ -47,6 +48,22 @@ export async function getStaticProps({ params }) {
                   }
                 }
               }
+              Comments {
+                data {
+                  id
+                  attributes {
+                    Comment
+                    createdAt
+                    UserId {
+                      data {
+                        attributes {
+                          username
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -66,6 +83,8 @@ export default function Post({ post }) {
     <div>
       <Navbar />
       <Article post={post.attributes} />
+      <div className={styles.divider}></div>
+      <ListComments data={post.attributes.Comments.data} />
       <div className={styles.commentDiv}>
         <CommentForm id={post.id} />
       </div>
