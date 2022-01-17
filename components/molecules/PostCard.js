@@ -12,6 +12,7 @@ export default function PostCard({ data, id }) {
             <p>{data.createdAt.substring(0, 10)}</p>
             <p>{data.Author.data.attributes.username}</p>
           </div>
+          <img src={data.Photo.data.attributes.formats.small.url} alt="" />
           <p className={styles.summary}>{data.Summary}</p>
         </a>
       </Link>

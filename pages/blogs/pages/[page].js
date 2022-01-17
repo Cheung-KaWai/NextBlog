@@ -7,7 +7,7 @@ import styles from "../../../styles/Pagination.module.scss";
 
 export async function getStaticPaths() {
   const res = await axios.get(
-    "https://still-escarpment-29927.herokuapp.com/api/blogs?pagination[page]=1&pagination[pageSize]=2"
+    "https://still-escarpment-29927.herokuapp.com/api/blogs?pagination[page]=1&pagination[pageSize]=3"
   );
   const pagination = res.data.meta.pagination;
 
@@ -15,14 +15,12 @@ export async function getStaticPaths() {
   for (let i = 1; i <= pagination.pageCount; i++) {
     pages.push({ params: { page: i.toString() } });
   }
-  // const paths = { paths: pages };
-  // console.log(paths);
   return { paths: pages, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
   const res = await axios.get(
-    `https://still-escarpment-29927.herokuapp.com/api/blogs?pagination[page]=${params.page}&pagination[pageSize]=2&populate=Author`
+    `https://still-escarpment-29927.herokuapp.com/api/blogs?pagination[page]=${params.page}&pagination[pageSize]=3&populate=Author&populate=Photo`
   );
   const post = res.data.data;
   const maxPages = res.data.meta.pagination.pageCount;

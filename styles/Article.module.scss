@@ -3,9 +3,15 @@
   margin: 0 auto;
   padding: 5rem 5rem 0 5rem;
 
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
   h1 {
     margin-bottom: 3rem;
-    font-size: 5rem;
+    font-size: 4rem;
     color: #46009f;
   }
   code {

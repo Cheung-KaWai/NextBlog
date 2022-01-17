@@ -7,7 +7,6 @@
     font-weight: 600;
     margin: 0.5rem;
     padding: 0.5rem 1rem;
-    text-transform: capitalize;
     cursor: pointer;
     outline: 0.3rem solid #46009f;
     border-radius: 0.5rem;
@@ -53,11 +52,15 @@
     margin: 1rem 0;
     background-color: #3b3b3b0f;
     font-size: 1.8rem;
-    text-transform: capitalize;
     color: #000000a1;
     &:focus {
       outline: 0.35rem outset rgba(70, 0, 159, 0.1);
     }
+  }
+
+  input[type="file"]::file-selector-button {
+    display: none;
+    text-align: center;
   }
 
   textarea {
@@ -71,7 +74,6 @@
     overflow: hidden;
     font-size: 1.8rem;
     color: #000000a1;
-    text-transform: capitalize;
     &:focus {
       outline: 0.35rem outset rgba(70, 0, 159, 0.1);
     }

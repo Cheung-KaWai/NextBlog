@@ -6,12 +6,12 @@ export default function LoadingAnimation() {
   const loadinContainerVariant = {
     start: {
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.075,
       },
     },
     end: {
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.075,
       },
     },
   };
@@ -27,7 +27,7 @@ export default function LoadingAnimation() {
 
   const loadingCircleTransition = {
     repeat: Infinity,
-    duration: 0.4,
+    duration: 0.5,
     ease: "easeInOut",
   };
 

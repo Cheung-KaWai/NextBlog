@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import styles from "../styles/Auth.module.scss";
 import Link from "next/link";
 import LoadingAnimation from "../components/atoms/LoadingAnimation";
+import ErrorComp from "../components/atoms/ErrorComp";
 
 export default function Login() {
   const [error, setError] = useState(undefined);
@@ -17,6 +18,7 @@ export default function Login() {
 
   const handleLogin = async (loginData) => {
     try {
+      setError(undefined);
       setloading(true);
       const response = await axios.post(
         "https://still-escarpment-29927.herokuapp.com/api/auth/local",
@@ -28,7 +30,8 @@ export default function Login() {
       setloading(false);
       router.push("/blogs/pages/1");
     } catch (e) {
-      setError(e.message);
+      setError("No account found with the given credentials");
+      setloading(false);
     }
   };
 
@@ -80,9 +83,11 @@ export default function Login() {
           <ErrorMessage name="password">
             {(msg) => <p className={styles.error}>{msg}</p>}
           </ErrorMessage>
+
           <button type="submit" className={styles.button}>
             Login
           </button>
+          {error && <ErrorComp error={error} />}
           {loading && <LoadingAnimation />}
           <div className={styles.link}>
             <p>No account yet?&nbsp;</p>
