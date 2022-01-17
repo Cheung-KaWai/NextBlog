@@ -1,16 +1,17 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import styles2 from "../styles/Home.module.scss";
 import Particles from "react-tsparticles";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  const particlesInit = (main) => {
-    console.log(main);
+  const router = useRouter();
+  const particlesInit = (main) => {};
 
-    // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
-  };
+  const particlesLoaded = (container) => {};
 
-  const particlesLoaded = (container) => {
-    console.log(container);
+  const handleRedirect = () => {
+    router.push("/login");
   };
 
   return (
@@ -22,26 +23,14 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
         <Particles
           id="tsparticles"
           init={particlesInit}
           loaded={particlesLoaded}
           options={{
-            background: {
-              color: {
-                value: "#ff0000",
-              },
-            },
             fpsLimit: 60,
             interactivity: {
               events: {
-                onClick: {
-                  enable: true,
-                  mode: "push",
-                },
                 onHover: {
                   enable: true,
                   mode: "repulse",
@@ -69,8 +58,8 @@ export default function Home() {
                 value: "#ffffff",
               },
               links: {
-                color: "#ffffff",
-                distance: 150,
+                color: "#46009f",
+                distance: 175,
                 enable: true,
                 opacity: 0.5,
                 width: 1,
@@ -83,13 +72,13 @@ export default function Home() {
                 enable: true,
                 outMode: "bounce",
                 random: false,
-                speed: 1,
+                speed: 0.75,
                 straight: false,
               },
               number: {
                 density: {
                   enable: true,
-                  area: 800,
+                  area: 1000,
                 },
                 value: 80,
               },
@@ -107,6 +96,10 @@ export default function Home() {
             detectRetina: true,
           }}
         />
+        <div className={styles2.titleContainer}>
+          <h1>Create your own SportsBlog</h1>
+          <button onClick={handleRedirect}>Start</button>
+        </div>
       </main>
     </div>
   );

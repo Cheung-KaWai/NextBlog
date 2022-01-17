@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -13,6 +13,12 @@ import LinkButton from "../atoms/LinkButton";
 import { AuthContext } from "../../context/AuthContextProvider";
 
 export default function AddPostForm({ categories }) {
+  const [imageState, setImageState] = useState({
+    file: "",
+  });
+  const [imgState, setImgState] = useState({
+    path: "",
+  });
   const turndownService = new TurndownService();
 
   const router = useRouter();
@@ -26,6 +32,16 @@ export default function AddPostForm({ categories }) {
       }),
     ],
   });
+
+  const handleFileChange = (e) => {
+    setImageState({
+      file: e.target.files[0],
+    });
+    setImgState({
+      ...imgState,
+      path: URL.createObjectURL(e.target.files[0]),
+    });
+  };
 
   return (
     <div className={styles.layout}>
@@ -47,6 +63,7 @@ export default function AddPostForm({ categories }) {
         onSubmit={(values, { setSubmitting }) => {
           const html = editor.getHTML();
           const markdown = turndownService.turndown(html);
+
           const data = {
             data: {
               ...values,
@@ -64,15 +81,28 @@ export default function AddPostForm({ categories }) {
             },
           };
 
-          // https://still-escarpment-29927.herokuapp.com/api/blogs
-          // http://localhost:1337/api/blogs
           axios
             .post(
               "https://still-escarpment-29927.herokuapp.com/api/blogs",
               data,
               config
             )
-            .then((response) => router.push("/blogs/pages/1"))
+
+            .then((response) => {
+              const file = new FormData();
+              file.append("files", imageState.file);
+              file.append("ref", "api::blog.blog");
+              file.append("refId", response.data.data.id);
+              file.append("field", "Photo");
+              axios
+                .post(
+                  "https://still-escarpment-29927.herokuapp.com/api/upload",
+                  file,
+                  config
+                )
+                .then((response) => router.push("/blogs/pages/1"))
+                .catch((error) => console.log(error));
+            })
             .catch((error) => console.log(error));
 
           setSubmitting(false);
@@ -104,11 +134,27 @@ export default function AddPostForm({ categories }) {
             <Menubar editor={editor} />
             <EditorContent editor={editor} className={styles.content} />
           </div>
+          {/*  */}
+          <input
+            type="file"
+            name="photo"
+            className="form-control"
+            onChange={handleFileChange}
+          />
+
+          {/*  */}
+
           <button type="submit" className={styles.button}>
             Create Post
           </button>
         </Form>
       </Formik>
+      <img
+        className="img-fluid"
+        src={imgState?.path}
+        id="preview-image"
+        alt=""
+      />
     </div>
   );
 }

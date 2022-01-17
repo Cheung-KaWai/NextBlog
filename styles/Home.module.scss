@@ -5,11 +5,45 @@
     color: #46009f;
   }
 
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: red;
+  }
+
   .blogsContainer {
     align-items: center;
     width: 60rem;
     margin: 0 auto;
   }
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 10 !important;
+
+  button {
+    margin-top: 2rem;
+    background-color: #46009f;
+    border: none;
+    color: white;
+    padding: 1rem;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      outline: 0.5rem outset rgba(70, 0, 159, 0.2);
+    }
+  }
+}
+
+.test {
+  background-color: red;
 }
 
 .addPost {
