@@ -18,11 +18,17 @@ export default function Navbar() {
         </Link>
       </div>
 
-      <Link href={`/accounts/${context.loggedUser && context.loggedUser.id}`}>
-        <a>
-          <ProfileImage />
-        </a>
-      </Link>
+      <div className={styles.containerLinks}>
+        <Link href={"/stats"}>
+          <a>Stats</a>
+        </Link>
+
+        <Link href={`/accounts/${context.loggedUser && context.loggedUser.id}`}>
+          <a>
+            <ProfileImage />
+          </a>
+        </Link>
+      </div>
     </nav>
   );
 }
