@@ -55,7 +55,7 @@ export default function AddPostForm({ categories }) {
         }}
         validationSchema={Yup.object({
           Title: Yup.string()
-            .max(15, "Must be 15 characters or less")
+            .max(40, "Must be 40 characters or less")
             .required("Required"),
           Summary: Yup.string()
             .max(100, "Must be 100 characters or less")
