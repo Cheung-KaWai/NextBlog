@@ -3,6 +3,7 @@ import MarkdownIt from "markdown-it/lib";
 import styles from "../../styles/Article.module.scss";
 import LinkButton from "../atoms/LinkButton";
 import Link from "next/link";
+import CircleIndicator from "../atoms/CircleIndicator";
 
 export default function Article({ post }) {
   const md = new MarkdownIt();
@@ -23,6 +24,7 @@ export default function Article({ post }) {
       ></div>
       <LinkButton link="/blogs/pages/1" text="Back" back={true} />
       <div />
+      <CircleIndicator />
     </div>
   );
 }

@@ -44,7 +44,7 @@ export default function CommentForm({ id }) {
               data,
               config
             )
-            .then((response) => router.push("/home"))
+            .then((response) => router.reload(window.location.pathname))
             .catch((error) => console.log(error));
           setSubmitting(false);
         }}

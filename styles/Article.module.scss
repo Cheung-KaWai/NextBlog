@@ -9,6 +9,14 @@
     object-fit: cover;
   }
 
+  .svg {
+    position: fixed;
+    right: 25rem;
+    bottom: 10rem;
+    width: 10rem;
+    height: 10rem;
+  }
+
   h1 {
     margin-bottom: 3rem;
     font-size: 4rem;
