@@ -1,14 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { AuthContext } from "../../context/AuthContextProvider";
 import axios from "axios";
 import { useRouter } from "next/router";
 import styles from "../../styles/AddPost.module.scss";
+import LoadingAnimation from "../atoms/LoadingAnimation";
+import ErrorComp from "../atoms/ErrorComp";
 
 export default function CommentForm({ id }) {
   const context = useContext(AuthContext);
   const router = useRouter();
+  const [error, setError] = useState(undefined);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className={styles.commentForm}>
@@ -21,6 +25,7 @@ export default function CommentForm({ id }) {
             .required("Required"),
         })}
         onSubmit={(values, { setSubmitting }) => {
+          setLoading(true);
           const data = {
             data: {
               ...values,
@@ -44,8 +49,14 @@ export default function CommentForm({ id }) {
               data,
               config
             )
-            .then((response) => router.reload(window.location.pathname))
-            .catch((error) => console.log(error));
+            .then((response) => {
+              setError(undefined);
+              router.reload(window.location.pathname);
+            })
+            .catch((error) => {
+              setLoading(false);
+              setError("Something went wrong");
+            });
           setSubmitting(false);
         }}
       >
@@ -58,6 +69,8 @@ export default function CommentForm({ id }) {
           <button type="submit" className={styles.button}>
             Send
           </button>
+          {error && <ErrorComp error={error} />}
+          {loading && <LoadingAnimation />}
         </Form>
       </Formik>
     </div>
