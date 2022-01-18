@@ -15,7 +15,7 @@ export async function getStaticPaths() {
   for (let i = 1; i <= pagination.pageCount; i++) {
     pages.push({ params: { page: i.toString() } });
   }
-  return { paths: pages, fallback: false };
+  return { paths: pages, fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {
@@ -26,7 +26,10 @@ export async function getStaticProps({ params }) {
   const maxPages = res.data.meta.pagination.pageCount;
 
   // Pass post data to the page via props
-  return { props: { post, currentPage: params.page, pageCount: maxPages } };
+  return {
+    props: { post, currentPage: params.page, pageCount: maxPages },
+    revalidate: 5,
+  };
 }
 
 export default function Page({ post, currentPage, pageCount }) {

@@ -26,7 +26,7 @@ export async function getStaticPaths() {
     params: { id: post.id.toString() },
   }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {
@@ -82,7 +82,7 @@ export async function getStaticProps({ params }) {
   });
 
   // Pass post data to the page via props
-  return { props: { post: data.blog.data } };
+  return { props: { post: data.blog.data }, revalidate: 5 };
 }
 
 export default function Post({ post }) {

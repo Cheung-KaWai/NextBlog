@@ -36,10 +36,6 @@ export default function LittlePostCard({ blog, hidePostsHandler }) {
             <CommentImage />
             <p>{blog.attributes.Comments.data.length}</p>
           </div>
-          {context.loggedUser &&
-            context.loggedUser.id === blog.attributes.Author.data.id && (
-              <button>modify</button>
-            )}
 
           {context.loggedUser &&
             context.loggedUser.id === blog.attributes.Author.data.id && (

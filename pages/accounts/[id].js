@@ -27,7 +27,7 @@ export async function getStaticPaths() {
     params: { id: post.id.toString() },
   }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {
@@ -53,6 +53,7 @@ export async function getStaticProps({ params }) {
       commentscount: comments.data.data.length,
       commentsReceived: receceived.reduce((a, b) => a + b, 0),
     },
+    revalidate: 5,
   };
 }
 
